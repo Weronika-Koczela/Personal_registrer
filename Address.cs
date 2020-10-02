@@ -12,14 +12,14 @@ namespace Personal_register
 		uint _houseNumber;
 		uint _apartamentNumber;
 
-		public Address(string postCode, string city, string street, uint houseNum, uint apartamentNum =0)
+		public Address(string postCode, string city, string street, uint houseNum, uint apartamentNum = 0)
 		{
 			_postCode = postCode;
 			_city = city;
 			_street = street;
 			_houseNumber = houseNum;
 			_apartamentNumber = apartamentNum;
-				
+
 		}
 		public string PostCode
 		{
@@ -36,15 +36,17 @@ namespace Personal_register
 		public string City
 		{
 			get => _city;
-			
+
 			set
 			{
-				if( String.IsNullOrEmpty(_city) == false)
-				_city = value;
+				if (String.IsNullOrEmpty(_city) == false)
+					_city = value;
 			}
 		}
 
-		public string Street { get => _street; set
+		public string Street
+		{
+			get => _street; set
 			{
 				if (String.IsNullOrEmpty(_city) == false)
 					_city = value;
@@ -53,5 +55,18 @@ namespace Personal_register
 
 		public uint HouseNumber { get => _houseNumber; set => _houseNumber = value; }
 		public uint ApartamentNumber { get => _apartamentNumber; set => _apartamentNumber = value; }
+		public override string ToString()
+		{
+			if (_houseNumber != 0)
+			{
+				return $"{_street} {_houseNumber} / {_apartamentNumber} \n {_postCode} {_city}";
+			}
+			else
+			{
+				return $"{_street} {_houseNumber} \n {_postCode} {_city}";
+
+			}
+		}
 	}
+
 }
