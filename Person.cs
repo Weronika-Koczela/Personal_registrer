@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Personal_register
 {
-	class Person
+	[Serializable]
+	[XmlRoot("Osoba")]
+	class Person : IComparable<Person>
 	{
 		string _firstName;
 		string _lastName;
@@ -21,6 +25,7 @@ namespace Personal_register
 			_address = address;
 		}
 
+		[XmlElement("Imie")]
 		public string FirstName
 		{
 			get => _firstName;
@@ -30,7 +35,7 @@ namespace Personal_register
 					_firstName = value;
 			}
 		}
-
+		[XmlElement("Nazwisko")]
 		public string LastName
 		{
 			get => _lastName;
@@ -40,7 +45,9 @@ namespace Personal_register
 					_firstName = value;
 			}
 		}
+		[XmlElement("Wiek")]
 		public uint Age { get => _age; set => _age = value; }
+		[XmlElement("Plec")]
 		public char Gender
 		{
 			get => _gender; set
@@ -49,7 +56,8 @@ namespace Personal_register
 					_gender = value;
 			}
 		}
-		internal Address Address
+		[XmlElement("Adres")]
+		public Address Address
 		{
 			get => _address; set
 			{
@@ -59,5 +67,24 @@ namespace Personal_register
 				}
 			}
 		}
+
+		public int CompareTo(Person other)
+		{
+			int result = FirstName.CompareTo(other.FirstName);
+			if (result == 0) 
+			{
+				result = LastName.CompareTo(other.LastName);
+			}
+			return result;
+		}
+
+        public override string ToString()
+		{
+			return $"Imię i nazwisko : {_firstName} {_lastName} \n wiek: {_age} \n płeć : {_gender} \n adres: {_address} ";
+		}
+
+
+
 	}
+
 }
