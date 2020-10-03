@@ -2,11 +2,16 @@
 
 namespace Personal_register
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			Console.WriteLine("Hello World!");
-		}
-	}
+    
+    class Program
+    {
+        static void MyLoop()
+        {
+            Helper.Menu();
+        }
+        static void Main(string[] args)
+        {
+            MyLoop();
+        }
+    }
 }
